@@ -169,7 +169,8 @@ def get_bulten_week_number_as_str(bulten_filename):
     return bulten_filename[x+1:x+3]
 
 def is_this_an_efso_mac(ref_name, mac):
-    return ref_name in [mac.ref, mac.ar1, mac.ar2]
+    return ref_name in [mac.ref, mac.ar1, mac.ar2, mac.observer]
 
 def get_efso_list():
-    return ['MÜCAHİD ADEM ÇELEBİ']
+    return ['MÜCAHİD ADEM ÇELEBİ', 'ERKAN AKÇAY',\
+            'ÖMER KİBİROĞLU', 'MERTCAN YILMAZ',]

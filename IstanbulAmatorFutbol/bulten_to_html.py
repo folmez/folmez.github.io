@@ -11,6 +11,8 @@ def create_efso_html():
         myFile.write('<body>')
         myFile.write('<br>')
         for hakem in efso_list:
+            myFile.write('<br>')
+            myFile.write('<br>')
             myFile.write('EFSO HAKEM: ' + hakem)
             myFile.write('<table  border="1">')
             myFile.write('<td>Gun</td>')
@@ -43,8 +45,8 @@ def create_efso_html():
                         myFile.write('<td>'+mac.fourth+'</td>')
                         myFile.write('<td>'+mac.observer+'</td>')
                         myFile.write('</tr>')
+            myFile.write('</table>')
 
-        myFile.write('</table>')
         myFile.write('</body>')
         myFile.write('</html>')
 
