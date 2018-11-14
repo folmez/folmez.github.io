@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <title>İstanbul Amatör Futbol Veri Tabanı - Değişiklik bildir</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+<body>
+    
+<div id="container">
+  <div id="header">
+      <h1>İstanbul Amatör Futbol Veri Tabanı</h1>
+  </div>
+  
+
+  <?php include "navbar.php"; ?>  
+  
+  <div id="content">    
+<br>
+<form method="post" action="sendmail.php" align=center>
+  Email: <input name="email" type="text" size=57 />
+  <br>
+  <label for="textarea">Mesaj:</label>
+  <textarea name="message" rows="15" cols="41"></textarea>
+  <br>
+  <input type="submit" value="Gönder"/>
+</form>
+
+</div>
+
+</body>
+</html>
+
+
