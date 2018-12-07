@@ -2,15 +2,16 @@ from datetime import datetime
 import TFF_match
 
 def create_match_from_csv_row(row):
-    return TFF_match.match(int(row[0]), \
+    return TFF_match.match(int(row[0][1::]), \
                     datetime.strptime(row[1], '%Y-%m-%d %H:%M:%S'), \
                     row[2], int(row[3]), row[4], int(row[5]), row[6], \
                     int(row[7]), row[8], int(row[9]), row[10], \
                     int(row[11]), row[12], int(row[13]), row[14], \
-                    int(row[15]), row[16], int(row[17]), int(row[18]))
+                    int(row[15]), row[16], int(row[17]), int(row[18][0::-1]))
 
 def get_match_id_from_csv_row(row):
-    return int(row[0])
+    # CSV files start with a quoation mark
+    return int(row[0][1::])
 
 def get_datetime_from_csv_row(row):
     return datetime.strptime(row[1], '%Y-%m-%d %H:%M:%S')
@@ -64,4 +65,5 @@ def get_home_team_skor_from_csv_row(row):
     return int(row[17])
 
 def get_away_team_skor_from_csv_row(row):
-    return int(row[18])
+    # CSV files end with a quoation mark
+    return int(row[18][0::-1])

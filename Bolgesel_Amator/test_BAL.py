@@ -3,7 +3,7 @@ import csv
 import TFF_match
 import match_csv_analysis as mca
 
-filename = '../../not_public/successfull_matches_1000_1010.csv'
+filename = '../../not_public/sample_matches_1000_1010.csv'
 mac = [TFF_match.initialize_mac() for i in range(8)]
 mac[0] = TFF_match.match(1004, datetime.datetime(2006,11,1,13,30,0), \
                             'Lig B Kademe (Profesyonel Takım)', \
@@ -12,12 +12,12 @@ mac[0] = TFF_match.match(1004, datetime.datetime(2006,11,1,13,30,0), \
                             52,'18 MART', 137, 'DARDANELSPOR A.Ş.', \
                             131, 'İNEGÖLSPOR', 2, 1)
 mac[1] = TFF_match.match(1002, datetime.datetime(2006,10,30,18,0,0), \
-                            'Türk Telekom  Lig  A (Profesyonel Takım)', \
+                            'Türk Telekom Lig A (Profesyonel Takım)', \
                             18902, 'SİNAN CEM İYİHUYLU', \
                             19963, 'ÖMER FARUK YEŞİL', 20144, 'MUSTAFA SÖNMEZ', \
                             19021, 'İLKER MERAL', 110, 'ATATÜRK OLİMPİYAT', \
                             3665, 'BÜYÜKŞEHİR BLD.SPOR', 132, 'KOCAELİSPOR', \
-                            2,1)
+                            2, 1)
 mac[2] = TFF_match.match(1005, datetime.datetime(2006,11,1,13,30,0), \
                             'Lig B Kademe (Profesyonel Takım)', \
                             19928, 'ÖZGÜR SEPİN', 18958, 'ŞENOL ERSOY', \
@@ -59,17 +59,20 @@ mac[7] = TFF_match.match(1008, datetime.datetime(2006,11,1,13,30,0), \
 
 def test_create_match_from_csv_row():
     with open(filename, 'r') as csv_file:
-        cvs_reader = csv.reader(csv_file, delimiter=',')
+        cvs_reader = csv.reader(csv_file, delimiter=',', quoting=csv.QUOTE_NONE)
         headers = next(cvs_reader)
         assert mac == [mca.create_match_from_csv_row(row) for row in cvs_reader]
-        
+
 def read_and_assert(func_handle, attr_source):
     with open(filename, 'r') as csv_file:
-        cvs_reader = csv.reader(csv_file, delimiter=',')
+        cvs_reader = csv.reader(csv_file, delimiter=',', quoting=csv.QUOTE_NONE)
         headers = next(cvs_reader)
         x =  [func_handle(row) for row in cvs_reader]
         for i in range(len(mac)):
             assert x[i] == getattr(mac[i], attr_source)
+
+def test_get_match_id_from_csv_row():
+    read_and_assert(mca.get_match_id_from_csv_row, 'mac_id')
 
 def test_get_datetime_from_csv_row():
     read_and_assert(mca.get_datetime_from_csv_row, 'datetime')
